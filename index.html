@@ -1,70 +1,134 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Gerador de Senhas</title>
+
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <h1>Gerador de Senhas</h1>
+    <main class="container">
 
-    <label for="campo-senha">Senha:</label>
+        <h1>Gerador de Senhas</h1>
 
-    <input
-        type="text"
-        id="campo-senha"
-        readonly
-    >
+        <p class="subtitulo">
+            Crie uma senha segura e confira sua força
+        </p>
 
-    <br><br>
+        <div class="campo-container">
 
-    <div class="parametro-senha-checkbox">
-        <input
-            name="maiusculo"
-            type="checkbox"
-            class="checkbox"
-            id="maiusculo"
-            checked
+            <label for="campo-senha">
+                Sua senha
+            </label>
+
+            <input
+                type="text"
+                id="campo-senha"
+                readonly
+            >
+
+        </div>
+
+
+        <div class="forca-container">
+
+            <div class="forca-texto">
+                <span>Força da senha</span>
+
+                <strong id="texto-forca">-</strong>
+            </div>
+
+            <div class="barra-forca">
+                <div id="barra-forca"></div>
+            </div>
+
+        </div>
+
+
+        <section class="opcoes">
+
+            <h2>Opções da senha</h2>
+
+            <div class="parametro-senha-checkbox">
+
+                <input
+                    type="checkbox"
+                    id="maiusculo"
+                    checked
+                >
+
+                <label for="maiusculo">
+                    Letras maiúsculas
+                </label>
+
+            </div>
+
+
+            <div class="parametro-senha-checkbox">
+
+                <input
+                    type="checkbox"
+                    id="minusculo"
+                >
+
+                <label for="minusculo">
+                    Letras minúsculas
+                </label>
+
+            </div>
+
+
+            <div class="parametro-senha-checkbox">
+
+                <input
+                    type="checkbox"
+                    id="numero"
+                >
+
+                <label for="numero">
+                    Números
+                </label>
+
+            </div>
+
+        </section>
+
+
+        <div class="tamanho-container">
+
+            <span>Tamanho da senha</span>
+
+            <div class="controle-tamanho">
+
+                <button onclick="diminuiTamanho()">−</button>
+
+                <span id="numero-senha">8</span>
+
+                <button onclick="aumentaTamanho()">+</button>
+
+            </div>
+
+        </div>
+
+
+        <button
+            class="botao-gerar"
+            onclick="geraSenha()"
         >
-        <label for="maiusculo">Letras maiúsculas</label>
-    </div>
+            Gerar nova senha
+        </button>
 
-    <div class="parametro-senha-checkbox">
-        <input
-            name="minusculo"
-            type="checkbox"
-            class="checkbox"
-            id="minusculo"
-        >
-        <label for="minusculo">Letras minúsculas</label>
-    </div>
+    </main>
 
-    <div class="parametro-senha-checkbox">
-        <input
-            name="numero"
-            type="checkbox"
-            class="checkbox"
-            id="numero"
-        >
-        <label for="numero">Números</label>
-    </div>
-
-    <br>
-
-    <button onclick="diminuiTamanho()">-</button>
-
-    <span id="numero-senha">8</span>
-
-    <button onclick="aumaentaTamanho()">+</button>
-
-    <br><br>
-
-    <button onclick="geraSenha()">
-        Gerar nova senha
-    </button>
 
     <script src="main.js"></script>
 
 </body>
+
 </html>
