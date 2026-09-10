@@ -1,7 +1,7 @@
 /*
 INTEGRANTES:
 Marcos Gabriel Gabardo
-Maria Rafaela
+Maria Rafaela Cardoso da Silva
 TURMA: 3ª Série J
 */
 const campoSenha = document.querySelector("#campo-senha");
