@@ -1,3 +1,9 @@
+/*
+INTEGRANTES:
+Marcos Gabriel Gabardo
+Maria Rafaela
+TURMA: 3ª Série J
+*/
 const campoSenha = document.querySelector("#campo-senha");
 const numeroSenha = document.querySelector("#numero-senha");
 
