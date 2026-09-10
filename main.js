@@ -1,80 +1,98 @@
-// Localiza o campo onde a senha será exibida
+// Campo onde a senha aparece
 const campoSenha = document.querySelector("#campo-senha");
 
-// Localiza o número que mostra o tamanho da senha
+// Número que mostra o tamanho da senha
 const numeroSenha = document.querySelector("#numero-senha");
 
-// Localiza os checkboxes
+// Checkboxes
 const maiusculo = document.querySelector("#maiusculo");
 const minusculo = document.querySelector("#minusculo");
 const numero = document.querySelector("#numero");
 
-// Letras que poderão ser utilizadas
+// Caracteres disponíveis
 const letrasMaiusculas = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
 const letrasMinusculas = "abcdefghijklmnopqrstuvwxyz";
-
 const numeros = "0123456789";
 
-// Tamanho inicial da senha
+// Tamanho inicial
 let tamanhoSenha = 8;
 
-// Gera a primeira senha quando a página abrir
-geraSenha();
 
 
-// Função responsável por gerar a senha
 function geraSenha() {
 
-    // Começamos com um conjunto de caracteres vazio
     let alfabeto = "";
 
-    // Verifica se maiúsculas foram selecionadas
+    // Adiciona letras maiúsculas
     if (maiusculo.checked) {
         alfabeto += letrasMaiusculas;
     }
 
-    // Verifica se minúsculas foram selecionadas
+    // Adiciona letras minúsculas
     if (minusculo.checked) {
         alfabeto += letrasMinusculas;
     }
 
-    // Verifica se números foram selecionados
+    // Adiciona números
     if (numero.checked) {
         alfabeto += numeros;
     }
 
-    // Se nenhum tipo de caractere estiver selecionado
+    // Nenhuma opção selecionada
     if (alfabeto === "") {
         campoSenha.value = "Selecione uma opção";
         return;
     }
 
-    // Senha começa vazia
     let senha = "";
 
-    // Repete o processo conforme o tamanho escolhido
-    for (let i = 0; i < tamanhoSenha; i++) {
+    // Garante pelo menos um caractere de cada opção escolhida
 
-        // Gera um número aleatório
-        let numeroAleatorio = Math.random() * alfabeto.length;
-
-        // Remove a parte decimal
-        numeroAleatorio = Math.floor(numeroAleatorio);
-
-        // Escolhe um caractere aleatório
-        senha += alfabeto[numeroAleatorio];
+    if (maiusculo.checked) {
+        senha += letrasMaiusculas[
+            Math.floor(Math.random() * letrasMaiusculas.length)
+        ];
     }
 
-    // Exibe a senha no campo
-   campoSenha.value = gerarSenhaSegura();
+    if (minusculo.checked) {
+        senha += letrasMinusculas[
+            Math.floor(Math.random() * letrasMinusculas.length)
+        ];
+    }
+
+    if (numero.checked) {
+        senha += numeros[
+            Math.floor(Math.random() * numeros.length)
+        ];
+    }
+
+
+    // Completa a senha até chegar ao tamanho escolhido
+    while (senha.length < tamanhoSenha) {
+
+        const aleatorio = Math.floor(
+            Math.random() * alfabeto.length
+        );
+
+        senha += alfabeto[aleatorio];
+    }
+
+
+    // Embaralha os caracteres
+    senha = senha
+        .split("")
+        .sort(() => Math.random() - 0.5)
+        .join("");
+
+
+    // Mostra a senha
+    campoSenha.value = senha;
 }
 
 
-// Diminui o tamanho da senha
+
 function diminuiTamanho() {
 
-    // Impede que a senha fique menor que 8 caracteres
     if (tamanhoSenha > 8) {
         tamanhoSenha--;
     }
@@ -85,10 +103,9 @@ function diminuiTamanho() {
 }
 
 
-// Aumenta o tamanho da senha
+
 function aumentaTamanho() {
 
-    // Limite máximo de 20 caracteres
     if (tamanhoSenha < 20) {
         tamanhoSenha++;
     }
@@ -97,60 +114,7 @@ function aumentaTamanho() {
 
     geraSenha();
 }
-// Testa se a senha é forte
-function testarSenha(senha) {
 
-    // Deve ter pelo menos uma maiúscula
-    if (!/[A-Z]/.test(senha)) {
-        return false;
-    }
 
-    // Deve ter pelo menos uma minúscula
-    if (!/[a-z]/.test(senha)) {
-        return false;
-    }
 
-    // Deve ter pelo menos um número
-    if (!/[0-9]/.test(senha)) {
-        return false;
-    }
-
-    // Não pode ter sequências simples
-    if (
-        senha.includes("12345") ||
-        senha.includes("abcdef") ||
-        senha.includes("ABCDEF")
-    ) {
-        return false;
-    }
-
-    return true;
-}
-
-// Gera senhas até encontrar uma forte
-function gerarSenhaSegura() {
-
-    let senha;
-
-    do {
-        senha = "";
-
-        let alfabeto = "";
-
-        if (maiusculo.checked) alfabeto += letrasMaiusculas;
-        if (minusculo.checked) alfabeto += letrasMinusculas;
-        if (numero.checked) alfabeto += numeros;
-
-        if (alfabeto === "") {
-            return "Selecione uma opção";
-        }
-
-        for (let i = 0; i < tamanhoSenha; i++) {
-            let aleatorio = Math.floor(Math.random() * alfabeto.length);
-            senha += alfabeto[aleatorio];
-        }
-
-    } while (testarSenha(senha) === false);
-
-    return senha;
-}
+geraSenha();
